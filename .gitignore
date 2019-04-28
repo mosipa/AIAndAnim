@@ -1,7 +1,3 @@
-Binaries/*
-Build/*
-Saved/*
-
 *.xcodeproj
 *.xcworkspace
 *.sln
@@ -10,3 +6,10 @@ Saved/*
 *.sdf
 *.VC.db
 *.VC.opendb
+
+AIAndAnim/Binaries/*
+AIAndAnim/Content/Geometry/*
+AIAndAnim/Content/Mannequin/*
+AIAndAnim/Content/ThirdPerson/Meshes/*
+AIAndAnim/Intermediate/*
+AIAndAnim/Saved/*
