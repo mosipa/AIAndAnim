@@ -1,0 +1,12 @@
+Binaries/*
+Build/*
+Saved/*
+
+*.xcodeproj
+*.xcworkspace
+*.sln
+*.suo
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.opendb
