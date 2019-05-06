@@ -2,6 +2,9 @@
 
 #include "Animal.h"
 #include "HealthComponent.h"
+#include "Engine/Classes/Components/CapsuleComponent.h"
+#include "Engine/Classes/Components/SkeletalMeshComponent.h"
+#include "Engine/Classes/GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
 AAnimal::AAnimal()
@@ -43,4 +46,36 @@ void AAnimal::OnDeath()
 	HealthComponent->DestroyComponent();
 	
 	HealthComponent = nullptr;
+	ChangeToRagdoll();
+}
+
+void AAnimal::ChangeToRagdoll()
+{
+	UCapsuleComponent* AnimalCapsule = GetCapsuleComponent();
+	USkeletalMeshComponent* AnimalMesh = GetMesh();
+
+	if (!AnimalMesh || !AnimalCapsule)
+	{
+		return;
+	}
+
+	FName Root = AnimalMesh->GetBoneName(0);
+
+	AnimalMesh->SetAllBodiesBelowSimulatePhysics(Root, true, true);
+	AnimalMesh->SetCollisionResponseToChannel(ECC_Pawn, ECR_Block);
+	AnimalMesh->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
+	AnimalMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	AnimalMesh->SetSimulatePhysics(true);
+
+	AnimalCapsule->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
+	AnimalCapsule->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
+
+	UCharacterMovementComponent* AnimalMovementComponent = GetCharacterMovement();
+
+	if (!AnimalMovementComponent)
+	{
+		return;
+	}
+
+	AnimalMovementComponent->GravityScale = 0.f;
 }

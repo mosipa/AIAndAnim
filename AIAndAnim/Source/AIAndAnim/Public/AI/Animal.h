@@ -37,4 +37,6 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void SetHealthComponent(UHealthComponent* NewComponent);
 
+private:
+	void ChangeToRagdoll();
 };
