@@ -43,6 +43,7 @@ void AAnimal::SetHealthComponent(UHealthComponent* NewComponent)
 
 void AAnimal::OnDeath()
 {
+	bIsAlive = false;
 	HealthComponent->DestroyComponent();
 	
 	HealthComponent = nullptr;
@@ -78,4 +79,9 @@ void AAnimal::ChangeToRagdoll()
 	}
 
 	AnimalMovementComponent->GravityScale = 0.f;
+}
+
+bool AAnimal::IsAlive() const
+{
+	return bIsAlive;
 }

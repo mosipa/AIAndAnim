@@ -26,6 +26,9 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UFUNCTION(BlueprintCallable)
+	bool IsAlive() const;
+
 private:
 	UPROPERTY(VisibleAnywhere, Category = "Health")
 	class UHealthComponent* HealthComponent = nullptr;
@@ -36,6 +39,9 @@ private:
 protected:
 	UFUNCTION(BlueprintCallable)
 	void SetHealthComponent(UHealthComponent* NewComponent);
+
+	UPROPERTY(VisibleDefaultsOnly, Category = "Health")
+	bool bIsAlive = true;
 
 private:
 	void ChangeToRagdoll();
